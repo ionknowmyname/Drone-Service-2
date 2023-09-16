@@ -65,11 +65,11 @@
 			<version>2.2.4</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.vladmihalcea</groupId>
-			<artifactId>hibernate-types-52</artifactId>
-			<version>2.2.2</version> <!-- Use the latest version available -->
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.vladmihalcea</groupId>-->
+<!--			<artifactId>hibernate-types-52</artifactId>-->
+<!--			<version>2.2.2</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

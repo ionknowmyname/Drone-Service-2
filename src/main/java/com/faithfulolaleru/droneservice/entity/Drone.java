@@ -43,15 +43,11 @@ public class Drone {
     @Column(name = "drone_state")
     private DroneState state;
 
-    // @Builder.Default
-    // @OneToMany(fetch = FetchType.LAZY, mappedBy = "drone", cascade = CascadeType.ALL)
-
     // @OnDelete(action = OnDeleteAction.CASCADE)
-//    @Type(type = "jsonb")
-//    @Column(columnDefinition = "jsonb")
-    @Builder.Default
-    // @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL)
+    // @Builder.Default
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "drone", cascade = CascadeType.ALL)
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<Medication> medications = new ArrayList<>();
+    @Column(columnDefinition = "jsonb")
+    private List<Medication> medications;
 
 }

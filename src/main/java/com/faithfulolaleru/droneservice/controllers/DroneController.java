@@ -99,4 +99,16 @@ public class DroneController {
                 .build();
     }
 
+    @GetMapping("/id/{serial}/batteryPercentage")
+    public AppResponse<?> getBatteryPercentOfDrone(@PathVariable("serial") UUID serial) {
+
+        String response = droneService.getBatteryPercentOfDrone(serial);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message(response)
+                .build();
+    }
+
 }

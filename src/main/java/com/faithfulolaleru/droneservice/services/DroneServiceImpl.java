@@ -88,7 +88,7 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    @Transactional
+    // @Transactional
     public DroneResponse loadMedicationToDrone(UUID serial, BulkMedicationRequest requestDto) {
 
         Drone foundDrone = findDroneBySerial(serial);
@@ -126,7 +126,7 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    @Transactional
+    // @Transactional
     public DroneResponse unloadMedicationToDrone(UUID serial, BulkMedicationRequest requestDto) {
 
         Drone foundDrone = findDroneBySerial(serial);
@@ -157,6 +157,13 @@ public class DroneServiceImpl implements DroneService {
         return response;
     }
 
+    @Override
+    public String getBatteryPercentOfDrone(UUID serial) {
+        Integer batteryCapacity = findDroneBySerial(serial).getBatteryCapacity();
+
+        return "Battery percentage of Drone is --> " + batteryCapacity;
+    }
+
     private Drone buildDroneEntity(DroneRequest request) {
 
         return Drone.builder()
@@ -165,7 +172,7 @@ public class DroneServiceImpl implements DroneService {
             .weight(request.getWeight())
             .batteryCapacity(request.getBatteryCapacity())
             .state(request.getState())
-            .medications(new ArrayList<>(new Medication()))
+            .medications(new ArrayList<>())
             .build();
     }
 

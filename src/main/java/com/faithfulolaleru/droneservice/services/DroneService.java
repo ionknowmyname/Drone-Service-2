@@ -23,5 +23,6 @@ public interface DroneService {
 
     DroneResponse unloadMedicationToDrone(UUID serial, BulkMedicationRequest requestDto);
 
+    String getBatteryPercentOfDrone(UUID serial);
 
 }
