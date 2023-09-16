@@ -13,3 +13,16 @@ cloudinary, you can decide to use s3 bucket or whichever.
 
 
 // make uploading in bulk possible, in case they wanna upload in batches
+
+
+```
+docker run -d \
+  --name my_postgres_container \
+  -e POSTGRES_DB=drone-service-db-2 \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -v /Users/faithfulolaleru/Documents/Volumes:/var/lib/postgresql/data:rw \
+  -p 5433:5432 \
+  postgres:latest
+
+```
