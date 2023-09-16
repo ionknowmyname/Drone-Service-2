@@ -38,7 +38,7 @@ public class CloudinaryConfig {
 
         Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
         cloudinary.config.secure = true;
-        System.out.println(cloudinary.config.cloudName);
+        // System.out.println(cloudinary.config.cloudName);
 
         return cloudinary;
     }

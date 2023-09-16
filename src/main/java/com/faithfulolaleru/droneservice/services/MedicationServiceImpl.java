@@ -5,6 +5,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.faithfulolaleru.droneservice.dtos.MedicationRequest;
 import com.faithfulolaleru.droneservice.dtos.MedicationResponse;
+import com.faithfulolaleru.droneservice.entity.Drone;
 import com.faithfulolaleru.droneservice.entity.Medication;
 import com.faithfulolaleru.droneservice.exception.ErrorResponse;
 import com.faithfulolaleru.droneservice.exception.GeneralException;
@@ -102,7 +103,51 @@ public class MedicationServiceImpl implements MedicationService {
         return null;
     }
 
+    @Override
+    public MedicationResponse setDroneForMedication(String medicationCode, Drone entity) {
+        // don't throw error if not found, drone service is calling iteratively, just ignore if not found
+
+        Medication foundMedication = medicationRepository.findByCode(medicationCode)
+                .orElse(null);
+
+        // check that found medication not already loaded to a drone before loading to drone
+        if(foundMedication != null && foundMedication.getDrone() == null) {
+            foundMedication.setDrone(entity);
+
+            Medication savedEntity = medicationRepository.save(foundMedication);
+
+            return modelMapper.map(savedEntity, MedicationResponse.class);
+        }
+
+        // if found medication already on a drone, don't update, leave as it is
+
+        // return modelMapper.map(foundMedication, MedicationResponse.class);
+        return null;
+
+        // use Update @Query in repo and add @Transactional
+        // try it for unsettingDrone
+    }
+
+    @Override
+    public MedicationResponse unsetDroneForMedication(String medicationCode) {
+        // same thing, don't throw error if not found, drone service is calling iteratively
+
+        Medication foundMedication = medicationRepository.findByCode(medicationCode)
+                .orElse(null);
+
+        if(foundMedication != null) {
+            foundMedication.setDrone(null);
+
+            Medication savedEntity = medicationRepository.save(foundMedication);
+
+            return modelMapper.map(savedEntity, MedicationResponse.class);
+        }
+
+        return null;
+    }
+
     public Medication buildMedicationEntity(MedicationRequest request, String photoLink) {
+
         return Medication.builder()
                 .id(UUID.randomUUID())
                 .name(request.getName())

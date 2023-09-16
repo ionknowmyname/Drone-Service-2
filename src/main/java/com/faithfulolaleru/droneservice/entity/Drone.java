@@ -8,8 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +43,15 @@ public class Drone {
     @Column(name = "drone_state")
     private DroneState state;
 
+    // @Builder.Default
+    // @OneToMany(fetch = FetchType.LAZY, mappedBy = "drone", cascade = CascadeType.ALL)
+
+    // @OnDelete(action = OnDeleteAction.CASCADE)
+//    @Type(type = "jsonb")
+//    @Column(columnDefinition = "jsonb")
     @Builder.Default
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "drone", cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    // @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL)
+    @JdbcTypeCode(SqlTypes.JSON)
     private List<Medication> medications = new ArrayList<>();
 
 }

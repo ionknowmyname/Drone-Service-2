@@ -1,8 +1,10 @@
 package com.faithfulolaleru.droneservice.controllers;
 
 
+import com.faithfulolaleru.droneservice.dtos.BulkMedicationRequest;
 import com.faithfulolaleru.droneservice.dtos.DroneRequest;
 import com.faithfulolaleru.droneservice.dtos.DroneResponse;
+import com.faithfulolaleru.droneservice.dtos.MedicationResponse;
 import com.faithfulolaleru.droneservice.enums.DroneState;
 import com.faithfulolaleru.droneservice.services.DroneService;
 import com.faithfulolaleru.droneservice.utils.AppResponse;
@@ -29,6 +31,7 @@ public class DroneController {
         return AppResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
+                .message("SUCCESSFUL")
                 .data(response)
                 .build();
     }
@@ -41,6 +44,7 @@ public class DroneController {
         return AppResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
+                .message("SUCCESSFUL")
                 .data(response)
                 .build();
     }
@@ -53,6 +57,44 @@ public class DroneController {
         return AppResponse.builder()
                 .statusCode(HttpStatus.CREATED.value())
                 .httpStatus(HttpStatus.CREATED)
+                .data(response)
+                .build();
+    }
+
+    @GetMapping("/id/{serial}/medications")
+    public AppResponse<?> getMedicationsOnDrone(@PathVariable("serial") UUID serial) {
+
+        List<MedicationResponse> response = droneService.getMedicationsOnDrone(serial);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .data(response)
+                .build();
+    }
+
+    @PutMapping("/id/{serial}/medications/add")
+    public AppResponse<?> loadMedicationToDrone(@PathVariable("serial") UUID serial,
+                                                @RequestBody BulkMedicationRequest requestDto) {
+
+        DroneResponse response = droneService.loadMedicationToDrone(serial, requestDto);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .data(response)
+                .build();
+    }
+
+    @PutMapping("/id/{serial}/medications/remove")
+    public AppResponse<?> unloadMedicationToDrone(@PathVariable("serial") UUID serial,
+                                                  @RequestBody BulkMedicationRequest requestDto) {
+
+        DroneResponse response = droneService.unloadMedicationToDrone(serial, requestDto);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
                 .data(response)
                 .build();
     }

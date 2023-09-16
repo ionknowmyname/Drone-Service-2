@@ -16,6 +16,13 @@ public class AppUtils {
         return true;
     }
 
+    public static boolean validateDroneToLoad(Drone entity) {
+        if(entity.getBatteryCapacity() < 25) {
+            return false;
+        }
+        return true;
+    }
+
     public static String generateRandomString(int n) {
 
         // chose a Character random from this String
