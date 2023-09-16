@@ -1,10 +1,9 @@
 package com.faithfulolaleru.droneservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "medication_table")

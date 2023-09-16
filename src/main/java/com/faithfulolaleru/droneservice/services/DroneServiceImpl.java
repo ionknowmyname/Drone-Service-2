@@ -12,17 +12,15 @@ import com.faithfulolaleru.droneservice.exception.ErrorResponse;
 import com.faithfulolaleru.droneservice.exception.GeneralException;
 import com.faithfulolaleru.droneservice.repository.DroneRepository;
 import com.faithfulolaleru.droneservice.utils.AppUtils;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.misc.NotNull;
+//import org.antlr.v4.runtime.misc.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -172,7 +170,7 @@ public class DroneServiceImpl implements DroneService {
             .weight(request.getWeight())
             .batteryCapacity(request.getBatteryCapacity())
             .state(request.getState())
-            .medications(new ArrayList<>())
+            // .medications(new ArrayList<>())
             .build();
     }
 
@@ -211,7 +209,7 @@ public class DroneServiceImpl implements DroneService {
         return dEntity;
     }
 
-    public Drone findDroneBySerial(@NotNull UUID serial) {
+    public Drone findDroneBySerial(UUID serial) {
 
         return droneRepository.findById(serial)
                 .orElseThrow(() -> new GeneralException(

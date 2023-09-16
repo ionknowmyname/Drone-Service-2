@@ -1,15 +1,14 @@
 package com.faithfulolaleru.droneservice.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -32,6 +31,5 @@ public class DroneBatteryLog {
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
 
 }

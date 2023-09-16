@@ -3,15 +3,15 @@ package com.faithfulolaleru.droneservice.entity;
 
 import com.faithfulolaleru.droneservice.enums.DroneModel;
 import com.faithfulolaleru.droneservice.enums.DroneState;
-import jakarta.persistence.*;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.Type;
+
+
+import jakarta.persistence.*;
 import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Drone {
 
     @Id
@@ -44,10 +45,13 @@ public class Drone {
     private DroneState state;
 
     // @OnDelete(action = OnDeleteAction.CASCADE)
-    // @Builder.Default
+
+//    @Column(columnDefinition = "jsonb")
+//    @Type(type = "jsonb")
+    @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "drone", cascade = CascadeType.ALL)
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private List<Medication> medications;
+    private List<Medication> medications = new ArrayList<>();
 
 }
