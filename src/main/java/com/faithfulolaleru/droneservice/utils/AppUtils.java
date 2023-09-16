@@ -1,6 +1,7 @@
 package com.faithfulolaleru.droneservice.utils;
 
 import com.faithfulolaleru.droneservice.entity.Drone;
+import com.faithfulolaleru.droneservice.entity.Medication;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -30,5 +31,32 @@ public class AppUtils {
         }
 
         return sb.toString();
+    }
+
+    public static boolean validateMedicationName(Medication entity) {
+
+        if(entity.getName().matches("^[A-Za-z0-9_-]*$")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean validateMedicationCode(Medication entity) {
+
+        // String toUpper = entity.getCode().toUpperCase(Locale.ROOT);
+
+        if(entity.getCode().matches("^[A-Z0-9_]*$")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean validateMedicationEntityToSave(Medication entity) {
+        if(!validateMedicationName(entity) || !validateMedicationCode(entity)) {
+            return false;
+        }
+        return true;
     }
 }
