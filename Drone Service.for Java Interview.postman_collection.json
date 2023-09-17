@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "b042d056-925a-42e3-93fa-03a7fba1bebb",
+		"name": "Drone Service.for Java Interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14117533"
+	},
+	"item": [
+		{
+			"name": "POST Create New Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"LIGHTWEIGHT\",\r\n    \"weight\": 37,\r\n    \"batteryCapacity\": 95,\r\n    \"state\": \"IDLE\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/drone/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drone",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Drone By Serial Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/drone/id/ae6c9865-4d5e-4ab2-b42b-fe220bae90fa",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drone",
+						"id",
+						"ae6c9865-4d5e-4ab2-b42b-fe220bae90fa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create New Medication",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Faithful/Pictures/pexels-hitarth-jadhav-220357.jpg"
+						},
+						{
+							"key": "request",
+							"value": "{\n    \"name\": \"Testing123\",\n    \"weight\": \"20\",\n    \"code\": \"dsdvsfgsfgsd\"\n}",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/medication/?name=Testing13&weight=20",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"medication",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Testing13"
+						},
+						{
+							"key": "weight",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create New Medication V2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/faithfulolaleru/Pictures/myphoto.jpg"
+						},
+						{
+							"key": "request",
+							"value": "{\n    \"name\": \"Testing123\",\n    \"weight\": \"20\",\n    \"code\": \"dsdvsfgsfgsd\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Testing126",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/medication/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"medication",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Testing13",
+							"disabled": true
+						},
+						{
+							"key": "weight",
+							"value": "20",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Load Medication aboard Drone",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"medicationCodes\": [\r\n        \"HYFVSAHWXT\",\r\n        \"TYFVS5HWAT\",\r\n        \"YYFZSAH8XW\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/drone/id/ae6c9865-4d5e-4ab2-b42b-fe220bae90fa/medications/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drone",
+						"id",
+						"ae6c9865-4d5e-4ab2-b42b-fe220bae90fa",
+						"medications",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Unload Medication offboard Drone",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"medicationCodes\": [\r\n        \"HYFVSAHWXT\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/drone/id/f6d4cc79-21f7-4e77-a1b7-43f4e6195116/medications/remove",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drone",
+						"id",
+						"f6d4cc79-21f7-4e77-a1b7-43f4e6195116",
+						"medications",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Drone Battery Log by Drone Serial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/droneBatteryLog/id/40a257ec-eda8-4a61-8b1f-d9e120fb86af",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"droneBatteryLog",
+						"id",
+						"40a257ec-eda8-4a61-8b1f-d9e120fb86af"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Drones by DroneState",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/drone/all?state=IDLE",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drone",
+						"all"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "IDLE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "drone_serial",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

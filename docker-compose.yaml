@@ -1,15 +1,24 @@
 version: '3.1'
 services:
-  db:
+  postgres:
     container_name: local-postgres
     ports:
       - '5433:5432'
     environment:
-      - POSTGRES_DB=drone-service-db
+      - POSTGRES_DB=drone-service-db-2
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - 'data:/var/lib/postgresql/data'
     image: postgres
+  api:
+    container_name: local-app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5433/drone-service-db-2
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    ports:
+      - '8080:8080'
+    image: drone-service:1.0
 

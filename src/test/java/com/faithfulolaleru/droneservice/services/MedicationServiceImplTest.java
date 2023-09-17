@@ -23,6 +23,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,8 +35,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith({SpringExtension.class})
@@ -67,7 +67,7 @@ class MedicationServiceImplTest {
         Map cloudinaryMapResponse  = new HashMap<>();
         cloudinaryMapResponse.put("url", "testing");
 
-        when(cloudinary.uploader().upload(any(), ObjectUtils.emptyMap())).thenReturn(cloudinaryMapResponse);
+        when(cloudinary.uploader().upload(any(File.class), anyMap())).thenReturn(cloudinaryMapResponse);
 
         when(medicationRepository.save(any())).thenReturn(getMedicationEntity());
 
